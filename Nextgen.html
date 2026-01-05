@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Next Gen Studio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+/* COMMON STYLES */
+body,html{margin:0;padding:0;font-family:Arial, Helvetica, sans-serif;}
+body{background:#000;color:#fff;overflow-x:hidden;}
+
+/* LOGO ANIMATION FULL SCREEN */
+#logoAnimation{
+position:fixed;
+top:0; left:0; width:100%; height:100%;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+}
+
+.logo-text{
+font-size:50px; font-weight:900; letter-spacing:5px; color:#fff;
+opacity:0; animation:fadeInGlow 2s forwards, pulse 2s 2s infinite;
+}
+
+.sub-text{
+font-size:20px; margin-top:10px; letter-spacing:3px; color:#00ffe1;
+opacity:0; animation:fadeIn 3s forwards 1.5s;
+}
+
+/* Animations */
+@keyframes fadeInGlow{
+0%{opacity:0; text-shadow:0 0 0 #00ffe1;}
+50%{opacity:1; text-shadow:0 0 20px #00ffe1, 0 0 30px #fff;}
+100%{opacity:1; text-shadow:0 0 10px #00ffe1, 0 0 20px #fff;}
+}
+@keyframes pulse{
+0%{text-shadow:0 0 5px #00ffe1;}
+50%{text-shadow:0 0 25px #00ffe1,0 0 35px #fff;}
+100%{text-shadow:0 0 5px #00ffe1;}
+}
+@keyframes fadeIn{0%{opacity:0;}100%{opacity:1;}}
+
+/* HIDDEN WEBSITE INITIALLY */
+#mainWebsite{display:none;}
+
+/* WEBSITE STYLES */
+header{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;border-bottom:2px solid #000;position:sticky;top:0;background:#fff;color:#000;z-index:100;}
+header .logo img{height:45px;}
+nav a{margin-left:20px;text-decoration:none;color:#000;font-weight:bold;}
+nav a:hover{text-decoration:underline;}
+.hero{height:85vh;display:flex;flex-direction:row;justify-content:center;align-items:center;text-align:center;background:#fff;color:#000;padding:20px;flex-wrap:wrap;}
+.hero-content{text-align:left;max-width:600px;}
+.hero h1{font-size:42px;font-weight:900;letter-spacing:2px;}
+.hero p{margin-top:10px;font-size:16px;letter-spacing:1px;}
+.hero button{margin-top:25px;padding:12px 30px;border:2px solid #000;background:#000;color:#fff;font-weight:bold;cursor:pointer;}
+.hero button:hover{background:#fff;color:#000;}
+.section{padding:70px 30px;max-width:1100px;margin:auto;border-top:2px solid #000;}
+.section h2{font-size:30px;margin-bottom:20px;font-weight:900;}
+.section p{font-size:15px;line-height:1.8;}
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+.card{border:2px solid #000;padding:25px;}
+.card h3{font-weight:900;margin-bottom:10px;}
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+.project{border:2px solid #000;padding:20px;font-weight:bold;}
+.contact-box{border:2px solid #000;padding:25px;}
+.contact-box input,.contact-box textarea{width:100%;padding:12px;margin-bottom:12px;border:2px solid #000;}
+.contact-box button{padding:12px 30px;background:#000;color:#fff;border:2px solid #000;font-weight:bold;cursor:pointer;}
+.contact-box button:hover{background:#fff;color:#000;}
+.info{margin-top:20px;font-size:14px;font-weight:bold;}
+.whatsapp{position:fixed;bottom:20px;right:20px;border:2px solid #000;padding:10px 16px;font-weight:bold;text-decoration:none;color:#000;background:#fff;}
+footer{border-top:2px solid #000;padding:15px;text-align:center;font-weight:bold;font-size:14px;}
+@media(max-width:900px){.hero{flex-direction:column;}.hero-content{text-align:center;}}
+@media(max-width:600px){nav{display:none;}.hero h1{font-size:30px;}}
+
+/* COMPANY INFO CARDS */
+.company-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:20px;}
+.company-card{border:2px solid #000;padding:20px;text-align:center;border-radius:12px;background:#111;color:#fff;transition:all 0.3s ease;box-shadow:0 5px 15px rgba(0,255,225,0.3);}
+.company-card:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 10px 25px rgba(0,255,225,0.5);}
+.company-card h4{font-weight:900;margin-bottom:10px;color:#00ffe1;}
+.company-card ul{list-style:none;padding:0;margin:0;font-size:14px;}
+.company-card ul li{margin-bottom:5px;position:relative;padding-left:15px;text-align:left;}
+.company-card ul li::before{content:"•";position:absolute;left:0;color:#00ffe1;font-weight:bold;}
+
+/* LOGO CONTAINER STYLE */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
+.logo-container{display:flex;justify-content:center;align-items:center;min-height:250px;font-family:'Orbitron',sans-serif;margin-right:30px;}
+.logo-wrapper{display:flex;flex-direction:column;align-items:center;}
+.main-box{background-color:#000;color:#fff;padding:10px 20px;border-radius:8px;display:flex;flex-direction:column;align-items:center;line-height:0.85;}
+.text-row{font-size:64px;font-weight:900;letter-spacing:-2px;transform:scaleY(1.1);}
+.sub-text-container{display:flex;align-items:center;justify-content:center;margin-top:12px;width:100%;color:#000;}
+.sub-text{font-size:18px;font-weight:900;letter-spacing:8px;margin:0 10px;padding-left:8px;}
+.line{height:3px;background-color:#000;flex-grow:1;max-width:40px;}
+</style>
+</head>
+<body>
+
+<!-- LOGO ANIMATION -->
+<div id="logoAnimation">
+  <div class="logo-text">NEXT GEN</div>
+  <div class="sub-text">STUDIOS</div>
+</div>
+
+<!-- MAIN WEBSITE -->
+<div id="mainWebsite">
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Next Gen Studio">
+  </div>
+  <nav>
+    <a href="#home">HOME</a>
+    <a href="#about">ABOUT</a>
+    <a href="#services">SERVICES</a>
+    <a href="#projects">PROJECTS</a>
+    <a href="#company">COMPANY INFO</a>
+    <a href="#contact">CONTACT</a>
+  </nav>
+</header>
+
+<!-- HERO WITH LEFT LOGO -->
+<section id="home" class="hero">
+  <div class="logo-container">
+    <div class="logo-wrapper">
+      <div class="main-box">
+        <div class="text-row">NEXT</div>
+        <div class="text-row">GEN</div>
+      </div>
+      <div class="sub-text-container">
+        <div class="line"></div>
+        <div class="sub-text">STUDIOS</div>
+        <div class="line"></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-content">
+    <h1>NEXT GEN STUDIO</h1>
+    <p>GAME DEVELOPMENT • APP DEVELOPMENT • AI SOLUTIONS</p>
+    <button onclick="scrollToContact()">CONTACT US</button>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <h2>ABOUT US</h2>
+  <p>Next Gen Studio is a modern technology studio focused on building next-generation games, apps, and AI systems.</p>
+</section>
+
+<section id="services" class="section">
+  <h2>SERVICES</h2>
+  <div class="services">
+    <div class="card"><h3>GAME DEVELOPMENT</h3><p>High-quality PC and mobile games.</p></div>
+    <div class="card"><h3>APP DEVELOPMENT</h3><p>Android & Web apps with professional UI/UX.</p></div>
+    <div class="card"><h3>AI SOLUTIONS</h3><p>Chatbots, automation tools & smart systems.</p></div>
+  </div>
+</section>
+
+<section id="projects" class="section">
+  <h2>PROJECTS</h2>
+  <div class="projects">
+    <div class="project">AAA HORROR GAME (PC)</div>
+    <div class="project">ANDROID GAMING APP</div>
+    <div class="project">AI CHATBOT PLATFORM</div>
+  </div>
+</section>
+
+<!-- COMPANY INFO -->
+<section id="company" class="section">
+  <h2>COMPANY INFO</h2>
+  <div class="company-grid">
+    <div class="company-card">
+      <h4>FOUNDER</h4>
+      <ul>
+        <li>Saras, Shiva</li>
+      </ul>
+    </div>
+    <div class="company-card">
+      <h4>EMPLOYEES</h4>
+      <ul>
+        <li>Saras</li>
+        <li>Shiva</li>
+        <li>Lakshya</li>
+      </ul>
+    </div>
+    <div class="company-card">
+      <h4>ANIMATORS</h4>
+      <ul>
+        <li>Saras</li>
+        <li>Shiva</li>
+      </ul>
+    </div>
+    <div class="company-card">
+      <h4>VOICE ACTORS</h4>
+      <ul>
+        <li>Saras</li>
+        <li>Shiva</li>
+        <li>Lakshya</li>
+        <li>Anurag</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <h2>CONTACT</h2>
+  <div class="contact-box">
+    <input type="text" placeholder="YOUR NAME">
+    <input type="email" placeholder="YOUR EMAIL">
+    <textarea rows="4" placeholder="YOUR MESSAGE"></textarea>
+    <button onclick="sendMsg()">SEND MESSAGE</button>
+    <div class="info">📞 9718065053<br>📧 support@nextgen.com</div>
+  </div>
+</section>
+
+<a class="whatsapp" href="https://wa.me/919718065053?text=Hello%20Next%20Gen%20Studio" target="_blank">WHATSAPP</a>
+<footer>© 2026 NEXT GEN STUDIO</footer>
+
+<script>
+function scrollToContact(){
+  document.getElementById("contact").scrollIntoView({behavior:"smooth"});
+}
+function sendMsg(){ alert("Message sent successfully!"); }
+
+/* ANIMATION TIMEOUT */
+setTimeout(()=>{
+  document.getElementById("logoAnimation").style.display="none";
+  document.getElementById("mainWebsite").style.display="block";
+},4000);
+</script>
+
+</body>
+  </html>
